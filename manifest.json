@@ -1,0 +1,11 @@
+{
+	"id": "caosmos-plugin",
+	"name": "Caosmos",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "enchance your obsidian experience with Caosmos",
+	"author": "Francesco Buda",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}
