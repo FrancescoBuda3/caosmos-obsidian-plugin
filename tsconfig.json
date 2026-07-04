@@ -10,6 +10,7 @@
 		"noUncheckedIndexedAccess": true,
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
+		"jsxImportSource": "react",
 		"isolatedModules": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
@@ -17,5 +18,5 @@
 		"ignoreDeprecations": "6.0",
 		"lib": ["ES2021", "DOM"]
 	},
-	"include": ["src/**/*.ts"]
+	"include": ["src/**/*.ts", "src/**/*.tsx"]
 }
