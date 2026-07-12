@@ -63,6 +63,12 @@ Quick starting guide for new plugin devs:
 - Together with a custom eslint [plugin](https://github.com/obsidianmd/eslint-plugin) for Obsidan specific code guidelines.
 - A GitHub action is preconfigured to automatically lint every commit on all branches.
 
+## Testing
+
+- Run the unit test suite with `npm run test`.
+- Use `npm run test:watch` while iterating locally.
+- The test runner is [Vitest](https://vitest.dev/) and the default setup targets Node-based unit tests under `tests/`.
+
 ## Funding URL
 
 You can include funding URLs where people who use your plugin can financially support it.
