@@ -5,6 +5,7 @@ import {
 	SampleSettingTab,
 } from './settings';
 import { HelloItemView, VIEW_TYPE_HELLO } from './obsidian/HelloItemView';
+import { registerDebugPostProcessor } from './obsidian/postProcessors/debugPostProcessor';
 
 export default class CaosmosPlugin extends Plugin {
 	settings!: MyPluginSettings;
@@ -21,6 +22,8 @@ export default class CaosmosPlugin extends Plugin {
 		this.addRibbonIcon('sparkles', 'Apri Hello Caosmos', () => {
 			this.activateView();
 		});
+
+		registerDebugPostProcessor(this);
 	}
 
 	onunload() {}
