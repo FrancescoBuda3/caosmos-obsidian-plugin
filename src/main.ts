@@ -6,6 +6,7 @@ import {
 } from './settings';
 import { HelloItemView, VIEW_TYPE_HELLO } from './obsidian/HelloItemView';
 import { registerDebugPostProcessor } from './obsidian/postProcessors/debugPostProcessor';
+import { registerStylePostProcessor } from './obsidian/postProcessors/stylePostProcessor';
 
 export default class CaosmosPlugin extends Plugin {
 	settings!: MyPluginSettings;
@@ -23,7 +24,7 @@ export default class CaosmosPlugin extends Plugin {
 			this.activateView();
 		});
 
-		registerDebugPostProcessor(this);
+		registerStylePostProcessor(this);
 	}
 
 	onunload() {}

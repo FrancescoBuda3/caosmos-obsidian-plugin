@@ -33,15 +33,14 @@ function extractBlockKind(el: Element): BlockKind {
 }
 
 /**
- * Converts a DOM container element into an array of RawBlock objects, each representing a block of content.
- * @param container The DOM container element.
+ * Converts a list of block wrapper elements into an array of RawBlock objects.
+ * @param wrappers The list of block wrapper elements.
  * @returns An array of RawBlock objects.
  */
-function extractBlocksFromContainer(container: Element): RawBlock[] {
-    const children = Array.from(container.children);
-    return children.map((child, index) => ({
+export function extractBlocksFromContainer(wrappers: HTMLElement[]): RawBlock[] {
+    return wrappers.map((child, index) => ({
         index,
         kind: extractBlockKind(child),
-        text: child.textContent || ''
+        text: child.textContent || '',
     }));
 }
