@@ -1,5 +1,6 @@
 .caosmos-block-group[data-caosmos-role="content"],
-.caosmos-block-group[data-caosmos-role="links"] {
+.caosmos-block-group[data-caosmos-role="links"],
+.caosmos-block-group[data-caosmos-role="title"] {
 	border: 1px solid var(--background-modifier-border);
 	border-radius: 12px;
 	padding: 1rem;

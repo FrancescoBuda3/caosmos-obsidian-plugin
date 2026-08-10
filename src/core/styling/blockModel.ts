@@ -27,5 +27,6 @@ export type BlockKind =
 /** a semantic role assigned to a block */
 export type BlockRole =
     | 'title'
+    | 'metadata'
     | 'content'
     | 'links' ;

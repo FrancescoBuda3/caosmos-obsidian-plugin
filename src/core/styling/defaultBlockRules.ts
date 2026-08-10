@@ -34,4 +34,22 @@ const remainingContentRule: BlockClassificationRule = (blocks: RawBlock[], roles
 	return newRoles;
 };
 
-export const defaultBlockRules: BlockClassificationRule[] = [titleRule, trailingLinksRule, remainingContentRule];
+const initialMetadataRule: BlockClassificationRule = (blocks: RawBlock[], _roles: Map<number, BlockRole>): Map<number, BlockRole> => {
+	const newRoles = new Map<number, BlockRole>();
+	let i = 0;
+	let j = blocks.length - 1;
+	while (i < blocks.length && blocks[i] && !htmlContainsOnlyWikilinks(blocks[i]!.html.replace(/^<[^>]+>|<\/[^>]+>$/g, ''))) {
+		i++;
+	}
+	while (j >= 0 && blocks[j] && htmlContainsOnlyWikilinks(blocks[j]!.html.replace(/^<[^>]+>|<\/[^>]+>$/g, ''))) {
+		j--;
+	}
+	if ((i != j || j != blocks.length - 1) && i > 0 && j < blocks.length - 1) {
+		for (let k = 0; k <= i; k++) {
+			newRoles.set(k, 'metadata');
+		}
+	}
+	return newRoles;
+}
+
+export const defaultBlockRules: BlockClassificationRule[] = [initialMetadataRule, trailingLinksRule, remainingContentRule];
