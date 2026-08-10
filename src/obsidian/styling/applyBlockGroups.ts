@@ -1,9 +1,10 @@
 import { BlockGroup } from "../../core/styling/blockGrouping";
+import { getBlockWrappers } from "./blockWrappers";
 
 const GROUP_WRAPPER_CLASS = "caosmos-block-group";
 const GROUP_WRAPPER_ROLE_ATTR = "data-caosmos-role";
 
-function unwrapExistingGroups(container: Element): void {
+export function unwrapExistingGroups(container: Element): void {
     const extistingWrappers = Array.from(
         container.querySelectorAll(`:scope > .${GROUP_WRAPPER_CLASS}`)
     );
@@ -18,7 +19,7 @@ function unwrapExistingGroups(container: Element): void {
 
 export function applyBlockGroups(container: Element, groups: BlockGroup[]): void {
     unwrapExistingGroups(container);
-    const blocks = Array.from(container.children);
+    const blocks = getBlockWrappers(container);
 
     for (const group of groups) {
         const firtsBlock = blocks[group.startIndex];

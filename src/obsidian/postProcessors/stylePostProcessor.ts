@@ -1,6 +1,7 @@
 import { MarkdownPostProcessorContext, Plugin } from 'obsidian';
 import { debounce } from "../utils/debounce";
 import { BlockGroupRenderChild } from '../styling/BlockGroupRenderChild';
+import { registerRenderChild } from '../styling/renderChildRegistry';
 
 const CONTAINER_SELECTOR = '.markdown-preview-sizer';
 const DEBOUNCE_DELAY_MS = 50;
@@ -26,7 +27,9 @@ export function registerStylePostProcessor(plugin: Plugin): void {
                     if (!(container instanceof HTMLElement)) {
                         return;
                     }
-                    pending!.lastCtx.addChild(new BlockGroupRenderChild(container));
+                    const instance = new BlockGroupRenderChild(container);
+                    registerRenderChild(container, instance);
+                    pending!.lastCtx.addChild(instance);
                 }, DEBOUNCE_DELAY_MS);
 
                 pending = { lastEl: el, lastCtx: ctx, trigger };

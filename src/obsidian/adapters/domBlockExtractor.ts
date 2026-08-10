@@ -10,7 +10,6 @@ function extractBlockKind(el: Element): BlockKind {
     if (!contentEl) {
         return 'other';
     }
-
     const tag = contentEl.tagName.toLowerCase();
     switch (tag) {
         case 'h1':
@@ -42,5 +41,6 @@ export function extractBlocksFromContainer(wrappers: HTMLElement[]): RawBlock[] 
         index,
         kind: extractBlockKind(child),
         text: child.textContent || '',
+        html: child.innerHTML || '',
     }));
 }

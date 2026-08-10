@@ -10,6 +10,9 @@ export interface RawBlock {
 
     /** The raw text content of the block */
     text: string;
+
+    /** The raw HTML content of the block */
+    html: string;
 }
 
 export type BlockKind =

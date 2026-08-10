@@ -1,15 +1,7 @@
-.markdown-preview-sizer {
-	position: relative;
-}
-
-.caosmos-block-overlay {
-	z-index: 0;
+.caosmos-block-group[data-caosmos-role="content"],
+.caosmos-block-group[data-caosmos-role="links"] {
 	border: 1px solid var(--background-modifier-border);
 	border-radius: 12px;
-	box-sizing: border-box;
-}
-
-.el-p, .el-pre, .el-ul, .el-ol, .el-h1, .el-h2, .el-h3 {
-	position: relative;
-	z-index: 1;
+	padding: 1rem;
+	margin-bottom: 1rem;
 }

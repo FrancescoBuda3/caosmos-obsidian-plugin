@@ -1,6 +1,6 @@
 import { BlockRole, RawBlock } from './blockModel';
 import { BlockClassificationRule } from './blockClassifier';
-import { textContainsOnlyWikilinks } from './blockClassifierPredicates';
+import { htmlContainsOnlyWikilinks, textContainsOnlyWikilinks } from './blockClassifierPredicates';
 
 const titleRule: BlockClassificationRule = (_blocks: RawBlock[], _roles: Map<number, BlockRole>): Map<number, BlockRole> => {
 	return new Map<number, BlockRole>([[0, 'title']]);
@@ -10,7 +10,12 @@ const trailingLinksRule: BlockClassificationRule = (blocks: RawBlock[], _roles: 
 	const newRoles = new Map<number, BlockRole>();
 	for (let i = blocks.length - 1; i >= 0; i--) {
 		const block = blocks[i];
-		if (block && textContainsOnlyWikilinks(block.text)) {
+		if (!block) {
+			continue;
+		}
+		const htmlWithoutOuterTag = block.html.replace(/^<[^>]+>|<\/[^>]+>$/g, '');
+
+		if (block && htmlContainsOnlyWikilinks(htmlWithoutOuterTag)) {
 			newRoles.set(i, 'links');
 		} else {
 			break;
