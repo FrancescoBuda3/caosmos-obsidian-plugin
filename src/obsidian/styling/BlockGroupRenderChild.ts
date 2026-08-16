@@ -7,6 +7,7 @@ import { groupContiguousBlocksByRole } from "../../core/styling/blockGrouping";
 import { renderBlockGroupOverlay } from "./blockGroupOverlay";
 import { debounce } from "../utils/debounce";
 import { applyBlockGroups, unwrapExistingGroups } from "./applyBlockGroups";
+import { unregisterRenderChild } from "./renderChildRegistry";
 
 const RECOMPUTE_DEBOUNCE_MS = 50;
 let instanceCounter = 0;
@@ -33,6 +34,7 @@ export class BlockGroupRenderChild extends MarkdownRenderChild {
 	onunload(): void {
 		this.mutationObserver?.disconnect();
 		this.mutationObserver = null;
+		unregisterRenderChild(this);
 	}
 
 	private startObserving(): void {
@@ -48,8 +50,6 @@ export class BlockGroupRenderChild extends MarkdownRenderChild {
 		const roles = classifyBlocks(blocks, defaultBlockRules);
 		const groups = groupContiguousBlocksByRole(roles);
 		applyBlockGroups(this.containerEl, groups);
-		//renderBlockGroupOverlay(this.containerEl, wrappers, groups);
-
 
 		this.startObserving();
 	}

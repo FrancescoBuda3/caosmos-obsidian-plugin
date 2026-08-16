@@ -1,6 +1,6 @@
 import { BlockRole, RawBlock } from './blockModel';
 import { BlockClassificationRule } from './blockClassifier';
-import { htmlContainsOnlyWikilinks, textContainsOnlyWikilinks } from './blockClassifierPredicates';
+import { textContainsOnlyWikilinks } from './blockClassifierPredicates';
 
 const titleRule: BlockClassificationRule = (_blocks: RawBlock[], _roles: Map<number, BlockRole>): Map<number, BlockRole> => {
 	return new Map<number, BlockRole>([[0, 'title']]);
@@ -13,9 +13,7 @@ const trailingLinksRule: BlockClassificationRule = (blocks: RawBlock[], _roles: 
 		if (!block) {
 			continue;
 		}
-		const htmlWithoutOuterTag = block.html.replace(/^<[^>]+>|<\/[^>]+>$/g, '');
-
-		if (block && htmlContainsOnlyWikilinks(htmlWithoutOuterTag)) {
+		if (block && textContainsOnlyWikilinks(block.text)) {
 			newRoles.set(i, 'links');
 		} else {
 			break;
@@ -38,10 +36,10 @@ const initialMetadataRule: BlockClassificationRule = (blocks: RawBlock[], _roles
 	const newRoles = new Map<number, BlockRole>();
 	let i = 0;
 	let j = blocks.length - 1;
-	while (i < blocks.length && blocks[i] && !htmlContainsOnlyWikilinks(blocks[i]!.html.replace(/^<[^>]+>|<\/[^>]+>$/g, ''))) {
+	while (i < blocks.length && blocks[i] && !textContainsOnlyWikilinks(blocks[i]!.text)) {
 		i++;
 	}
-	while (j >= 0 && blocks[j] && htmlContainsOnlyWikilinks(blocks[j]!.html.replace(/^<[^>]+>|<\/[^>]+>$/g, ''))) {
+	while (j >= 0 && blocks[j] && textContainsOnlyWikilinks(blocks[j]!.text)) {
 		j--;
 	}
 	if ((i != j || j != blocks.length - 1) && i > 0 && j < blocks.length - 1) {

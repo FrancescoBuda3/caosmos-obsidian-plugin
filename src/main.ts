@@ -7,6 +7,8 @@ import {
 import { HelloItemView, VIEW_TYPE_HELLO } from './obsidian/HelloItemView';
 import { registerDebugPostProcessor } from './obsidian/postProcessors/debugPostProcessor';
 import { registerStylePostProcessor } from './obsidian/postProcessors/stylePostProcessor';
+import { unloadAllRenderChildren } from './obsidian/styling/renderChildRegistry';
+import { debugSyntaxTreePlugin } from './obsidian/styling/debugSyntaxTreePlugin';
 
 export default class CaosmosPlugin extends Plugin {
 	settings!: MyPluginSettings;
@@ -20,6 +22,8 @@ export default class CaosmosPlugin extends Plugin {
 			(leaf) => new HelloItemView(leaf)
 		);
 
+		this.registerEditorExtension(debugSyntaxTreePlugin);
+
 		this.addRibbonIcon('sparkles', 'Apri Hello Caosmos', () => {
 			this.activateView();
 		});
@@ -27,7 +31,9 @@ export default class CaosmosPlugin extends Plugin {
 		registerStylePostProcessor(this);
 	}
 
-	onunload() {}
+	onunload() {
+		unloadAllRenderChildren();
+	}
 
 	async activateView() {
 		this.app.workspace.detachLeavesOfType(VIEW_TYPE_HELLO);

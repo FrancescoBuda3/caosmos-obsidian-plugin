@@ -9,6 +9,23 @@ body {
 	margin: 0rem !important;
 }
 
+.markdown-reading-view,
+.markdown-preview-view {
+	container-type: inline-size;
+}
+
+@media (max-width: 1000px) {
+	.markdown-preview-section {
+		padding: 0 !important;
+	}
+}
+
+@container (max-width: 1000px) {
+	.markdown-preview-section {
+		padding: 0 !important;
+	}
+}
+
 .caosmos-block-group[data-caosmos-role="content"],
 .caosmos-block-group[data-caosmos-role="links"] {
 	border-radius: 2.5rem;

@@ -22,14 +22,3 @@ export function textContainsOnlyWikilinks(text: string): boolean {
 	const wikilinkPattern = /\[\[.*?\]\]/g;
 	return textContainsOnlyPattern(text, wikilinkPattern);
 }
-
-/**
- * Determines if HTML contains only wikilinks.
- * @param html 
- * @returns true if the HTML contains only wikilinks, false otherwise
- */
-export function htmlContainsOnlyWikilinks(html: string): boolean {
-	const wikilinkPattern = /<a[^>]*href="[^"]*\"[^>]*>.*?<\/a>/g;
-	//console.log(html, 'contains only wikilinks?', textContainsOnlyPattern(html, wikilinkPattern));
-	return textContainsOnlyPattern(html, wikilinkPattern);
-}

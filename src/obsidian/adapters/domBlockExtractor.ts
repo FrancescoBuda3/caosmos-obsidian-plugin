@@ -31,6 +31,25 @@ function extractBlockKind(el: Element): BlockKind {
     }
 }
 
+function extractBlockText(el: HTMLElement): string {
+    const contentEl = el.children[0];
+    if (!contentEl || contentEl.tagName.toLowerCase() !== 'p') {
+        return el.textContent || '';
+    }
+
+    const paragraph = contentEl as HTMLElement;
+    if (!paragraph.querySelector('a')) {
+        return el.textContent || '';
+    }
+
+    const clonedParagraph = paragraph.cloneNode(true) as HTMLElement;
+    clonedParagraph.querySelectorAll('a').forEach((anchor) => {
+        anchor.replaceWith(`[[${anchor.textContent || ''}]]`);
+    });
+
+    return clonedParagraph.textContent || '';
+}
+
 /**
  * Converts a list of block wrapper elements into an array of RawBlock objects.
  * @param wrappers The list of block wrapper elements.
@@ -40,7 +59,7 @@ export function extractBlocksFromContainer(wrappers: HTMLElement[]): RawBlock[] 
     return wrappers.map((child, index) => ({
         index,
         kind: extractBlockKind(child),
-        text: child.textContent || '',
+        text: extractBlockText(child),
         html: child.innerHTML || '',
     }));
 }
