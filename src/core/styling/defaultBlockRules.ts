@@ -42,7 +42,7 @@ const initialMetadataRule: BlockClassificationRule = (blocks: RawBlock[], _roles
 	while (j >= 0 && blocks[j] && textContainsOnlyWikilinks(blocks[j]!.text)) {
 		j--;
 	}
-	if ((i != j || j != blocks.length - 1) && i > 0 && j < blocks.length - 1) {
+	if ((i != j + 1 || j != blocks.length - 2) && i < blocks.length) {
 		for (let k = 0; k <= i; k++) {
 			newRoles.set(k, 'metadata');
 		}

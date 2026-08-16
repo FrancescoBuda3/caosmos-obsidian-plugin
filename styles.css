@@ -14,15 +14,10 @@ body {
 	container-type: inline-size;
 }
 
-@media (max-width: 1000px) {
-	.markdown-preview-section {
-		padding: 0 !important;
-	}
-}
 
-@container (max-width: 1000px) {
+@supports (width: 1cqw) {
 	.markdown-preview-section {
-		padding: 0 !important;
+		padding-inline: clamp(0rem, calc((100cqw - 520px) / 4), 10rem) !important;
 	}
 }
 
