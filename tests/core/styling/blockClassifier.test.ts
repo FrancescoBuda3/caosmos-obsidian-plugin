@@ -11,8 +11,10 @@ describe('classifyBlocks', () => {
 
 	it('merges rule results in order', () => {
 		const blocks: RawBlock[] = [
-			{ index: 0, kind: 'paragraph', text: 'title' },
-			{ index: 1, kind: 'paragraph', text: 'body' },
+			{
+				index: 0, kind: 'paragraph', text: 'title', html: ''
+			},
+			{ index: 1, kind: 'paragraph', text: 'body', html: '' },
 		];
 
 		const firstRule = () => new Map<number, BlockRole>([[0, 'title']]);
